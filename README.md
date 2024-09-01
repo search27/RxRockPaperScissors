@@ -16,3 +16,43 @@ Visit https://github.com/search27/rxbrains
 ## RockPaperScissors
 * 가위바위보 기본 게임 동작 프로그램
 
+```javascript
+const defaultRule = [
+    { input: [1, 0, 0, 1, 0, 0], output: [0, 0, 1] },
+    { input: [0, 1, 0, 0, 1, 0], output: [0, 0, 1] },
+    { input: [0, 0, 1, 0, 0, 1], output: [0, 0, 1] },
+
+    { input: [1, 0, 0, 0, 1, 0], output: [0, 1, 0] },
+    { input: [1, 0, 0, 0, 0, 1], output: [1, 0, 0] },
+
+    { input: [0, 1, 0, 1, 0, 0], output: [1, 0, 0] },
+    { input: [0, 1, 0, 0, 0, 1], output: [0, 1, 0] },
+
+    { input: [0, 0, 1, 1, 0, 0], output: [0, 1, 0] },
+    { input: [0, 0, 1, 0, 1, 0], output: [1, 0, 0] },
+];
+
+window.gameData = {
+    round : 0, aiScore : 0, humanScore : 0, winner : -1,
+    time : 0, trickCount : 0,
+}
+```
+
+```javascript
+const prg = new RxFramework.RxRockPaperScissors({
+    target : document.getElementById('targetDom'),      // Target Element For Display Program
+    HumanChoose : HumanChoose,                          // Human Choose
+});
+
+// Random Choose
+const randomChoose = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+prg.SetDecision(randomChoose[Math.round(Math.random() * (randomChoose.length - 1))]);
+
+// 가위바위보 - 선택
+const HumanChoose = (_result) => {
+    const winner = prg.CheckWinner(_result, defaultRule);
+    prg.AppendScore(winner, gameData);
+    prg.ClearDecision();
+}
+
+```
