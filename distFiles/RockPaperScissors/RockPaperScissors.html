@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <script src="./RxFramework.js"></script>
+
+
+
+        <style>
+          
+            #targetDom {
+                position: absolute;
+                top : 50%;
+                left : 50%;
+                transform: translate(-50%, -50%);
+                width : 500px;
+                height : 500px;
+                border : 1px solid #333;
+                padding : 5px;
+                opacity: .5;
+            }
+
+            #targetDom > div {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+            }
+            #targetDom > div > div {
+            }
+            #targetDom > div > div:nth-child(1){
+                flex : 1;
+                display : flex;
+            }
+            #targetDom > div > div:nth-child(1) > div {
+                position: relative;
+                flex : 1;
+                display: flex;
+                flex-direction: column;
+            }
+            #targetDom > div > div:nth-child(1) > div:nth-child(1){
+                border-right: 1px solid #ccc;
+            }
+            #targetDom > div > div:nth-child(1) > div > div {
+                text-align: center;
+                font-weight: bolder;
+                padding : 10px;
+            }
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(1){
+                font-size: 18px;
+                
+            }
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(2){
+                flex : 1;
+                font-size: 53px;
+                line-height: 333px;
+            }
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(3){
+                position: absolute;
+                bottom: 0;
+                text-align: center;
+                width: 100%;
+            }
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(3) img {
+                width: 50px;
+                box-shadow: 1px 2px 3px;
+                background: rgba(0, 0, 0, 1);
+            }
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(3) img.rock { background-color: yellow;}
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(3) img.paper { background-color: green;}
+            #targetDom > div > div:nth-child(1) > div > div:nth-child(3) img.scissors { background-color: red;}
+            #targetDom > div > div:nth-child(2){
+                height: 50px;
+                text-align: center;
+            }
+            #targetDom > div > div:nth-child(2) > button{
+                min-width: 100px;
+                height: 100%;
+                padding : 10px;
+                margin-right: 5px;
+            }
+
+            .top {
+                position: absolute;
+                top : 0;
+                left : 50%;
+                transform: translate(-50%, calc(-100% - 30px));
+                width : 500px;
+                display: flex;
+            }
+            .top > div {
+                flex : 1;
+            }
+            .top > div > span > span { padding : 10px; }
+            .top > div > span > span:nth-child(2){ font-weight: bolder; font-size: 28px; }
+
+
+        </style>
+
+        <script>
+
+            
+
+            // Default Rule Data - AI, Human
+            const defaultRule = [
+                { input: [1, 0, 0, 1, 0, 0], output: [0, 0, 1] },
+                { input: [0, 1, 0, 0, 1, 0], output: [0, 0, 1] },
+                { input: [0, 0, 1, 0, 0, 1], output: [0, 0, 1] },
+
+                { input: [1, 0, 0, 0, 1, 0], output: [0, 1, 0] },
+                { input: [1, 0, 0, 0, 0, 1], output: [1, 0, 0] },
+
+                { input: [0, 1, 0, 1, 0, 0], output: [1, 0, 0] },
+                { input: [0, 1, 0, 0, 0, 1], output: [0, 1, 0] },
+
+                { input: [0, 0, 1, 1, 0, 0], output: [0, 1, 0] },
+                { input: [0, 0, 1, 0, 1, 0], output: [1, 0, 0] },
+            ];
+
+
+            // 가위바위보 - 선택
+            const HumanChoose = (_result) => {
+                const winner = prg.CheckWinner(_result, defaultRule);
+                prg.AppendScore(winner, gameData);
+                prg.ClearDecision();
+            }
+
+            window.gameData = {
+                round : 0, aiScore : 0, humanScore : 0, winner : -1,
+                time : 0, trickCount : 0,
+            }
+
+
+            const initFunc = () => {
+
+                // Game Program
+                prg = new RxFramework.RxRockPaperScissors({
+                    target : document.getElementById('targetDom'),
+                    HumanChoose : HumanChoose,
+                });
+
+                // Random Choose
+                setInterval(()=>{
+                    const randomChoose = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+                    prg.SetDecision(randomChoose[Math.round(Math.random() * (randomChoose.length - 1))]);
+                }, 100);
+                
+            }
+
+
+            let prg;
+            window.onload = function(){
+
+                const readyRxFramework = 500;
+                setTimeout(()=>{ initFunc(); }, readyRxFramework);
+
+            }
+
+        </script>
+
+
+
+    </head>
+    <body>
+
+        <h1> 가위 바위 보 </h1>
+
+        <div id="targetDom">
+        </div>
+
+
+
+
+
+    </body>
+</html>
