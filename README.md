@@ -70,21 +70,11 @@ const HumanChoose = (_result) => {
     const msg = `MBTI 질문 테스트입니다.`;
     personality.AskProceedings(msg, personality.GetRandomAsk);
 ```
-### 랜덤 질문 생성
 ```javascript
-    personality.GetRandomAsk();
-```
-### 해당 점수 반환
-```javascript
-    const result = personality.GetMbtiPoints();
-```
-### 질문 횟수 반환
-```javascript
-    const result = personality.GetMbtiAskCount();
-```
-### 결과 값
-```javascript
-    const result = personality.GetMbtiState();
+    personality.GetRandomAsk();                     // 랜덤 질문 생성
+    const result1 = personality.GetMbtiPoints();     // 해당 점수 반환
+    const result2 = personality.GetMbtiAskCount();   // 질문 횟수 반환
+    const result3 = personality.GetMbtiState();      // 결과 값
 ```
 
 
