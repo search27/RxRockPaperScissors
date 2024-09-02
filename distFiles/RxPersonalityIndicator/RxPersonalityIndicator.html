@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <script src="./RxFramework.js"></script>
+        <!-- <script src="./RxPersonalityIndicator.js"></script> -->
+
+        
+
+        <style>
+           
+
+            .ask {
+                border : 1px solid #ccc;
+                border-radius: 10px;
+                position: absolute;
+                top : 50%;
+                left : 50%;
+                transform: translate(-50%, -50%);
+                width: 590px;
+                background: rgba(255, 255, 255, 1);
+                padding : 30px;
+                
+            }
+            .ask h2 {
+                text-align: center;
+
+            }
+            .grd-points {
+                text-align: center;
+            }
+            .grd-points button{
+                border : 0;
+                border-radius: 50%;
+                text-align: center;
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                background-color: rgb(42, 78, 255);
+                box-shadow: 1px 2px 3px #333;
+                font-size: 22px;
+                color : white;
+                opacity: 0.9;
+                cursor: pointer;
+            }
+            .grd-points button:nth-child(2n){
+                transform: scale(0.9);
+            }
+            .grd-points button:nth-child(3){
+                transform: scale(0.8);
+            }
+            .grd-points button:hover {
+                opacity: 1;
+            }
+            .grd-points button:active {
+                opacity: 1;
+                box-shadow: none;
+            }
+   
+
+            .yesorno {
+                display: flex;
+                text-align: center;
+            }
+            .yesorno > button{
+                border : 0;
+                border-radius: 50%;
+                text-align: center;
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                background-color: rgb(42, 78, 255);
+                box-shadow: 1px 2px 3px #333;
+                font-size: 22px;
+                color : white;
+                opacity: 0.9;
+                cursor: pointer;
+                margin : 0 auto;
+            }
+
+        </style>
+        <script>
+
+            
+
+            const normalize = (max, min, x) => { return (x - min) / (max - min); }
+            const initFunc = () => {
+                personality = new RxFramework.RxPersonalityIndicator();
+                const msg = `MBTI 질문 테스트입니다.`;
+                personality.AskProceedings(msg, personality.GetRandomAsk);
+            }
+
+
+            const GetNormalize = () => {
+                console.log(personality.GetMbtiState());
+            }
+
+            const GetPoints = () => {
+                console.log(personality.GetMbtiPoints());
+            }
+
+            const GetCounts = () => {
+                console.log(personality.GetMbtiAskCount());
+            }
+
+            let personality;
+            window.onload = function(){
+
+                setInterval(()=>{
+                    personality.GetRandomAsk()
+                }, 1000);
+                const readyRxFramework = 500;
+                setTimeout(()=>{ initFunc(); }, readyRxFramework);
+
+            }
+
+        </script>
+
+
+
+    </head>
+    <body>
+
+        <div>
+            <button onclick="GetNormalize()"> 결과값 출력 </button>
+            <button onclick="GetNormalize()"> 점수 출력 </button>
+            <button onclick="GetCounts()"> 질문 횟수 출력 </button>
+        </div>
+
+        <h1> MBTI 성격 테스트 </h1>
+
+
+
+
+
+    </body>
+</html>

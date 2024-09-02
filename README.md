@@ -8,6 +8,9 @@ RxRockPaperScissors
 
 - [Rx Brain Node](#rx-brain-node)
 - [RockPaperScissors](#RockPaperScissors)
+- [RxPersonalityIndicator](#RxPersonalityIndicator)
+
+
 
 ## Rx Brain Node
 Visit https://github.com/search27/rxbrains
@@ -56,3 +59,32 @@ const HumanChoose = (_result) => {
 }
 
 ```
+
+
+## RxPersonalityIndicator
+* MBTI 기본 질문
+
+### 생성
+```javascript
+    personality = new RxFramework.RxPersonalityIndicator();
+    const msg = `MBTI 질문 테스트입니다.`;
+    personality.AskProceedings(msg, personality.GetRandomAsk);
+```
+### 랜덤 질문 생성
+```javascript
+    personality.GetRandomAsk();
+```
+### 해당 점수 반환
+```javascript
+    const result = personality.GetMbtiPoints();
+```
+### 질문 횟수 반환
+```javascript
+    const result = personality.GetMbtiAskCount();
+```
+### 결과 값
+```javascript
+    const result = personality.GetMbtiState();
+```
+
+
