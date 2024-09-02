@@ -42,7 +42,7 @@
             let index = 0;
             const changeEvt = () => {
                 index++;
-                if(images.length < index) index = 0;
+                if(images.length - 1 < index) index = 0;
 
                 // There is [Ready State],
                 // This should be waitting, until completing load Image.
