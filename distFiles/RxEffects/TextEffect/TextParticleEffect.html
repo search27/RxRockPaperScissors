@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <style>
+            * { box-sizing: border-box; }
+            html, body {
+                padding : 0;
+                margin : 0;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+            }
+            .header {
+                position: absolute;
+                width: 300px;
+                padding: 10px;
+                z-index: 2;
+            }
+            .header input {
+                width: 100%;
+                padding : 7px 15px;
+            }
+            canvas {
+                position: absolute;
+                top : 0;
+                left : 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+        </style>
+
+        <script src="./RxFramework.js"></script>
+
+        <script>
+            const textChangeEvent = (e) => {
+                const value = e.target.value.trim();
+                if(value === '') return;
+
+                const texts = [
+                    {
+                        txt : String(value),
+                        coordinate : [0, 0],
+                        width : window.innerWidth,
+                        height : window.innerHeight,
+                        lineHeight : 152,
+                        fontSize : 152,
+                    },
+                ];
+                particles.SetText(texts);
+            }
+
+            let particles;
+            const initFunc = () => {
+
+                // Effect
+                const canvas = document.getElementById("canvas");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                // window.addEventListener('resize', function(){
+                //     canvas.width = window.innerWidth;
+                //     canvas.height = window.innerHeight;
+                // });
+
+                const ctx = canvas.getContext('2d');
+                // const gradients = ['FABC3F', 'E85C0D', 'C7253E', '821131'];
+                const gradients = ['F6E96B', 'BEDC74', 'A2CA71', '387F39'];
+                particles = new RxFramework.TextParticleEffect({ canvas : canvas, gradients });
+                // particles.SetQuality(1);
+
+                const texts = [
+                    {
+                        txt : String('Rx Text Particle Effect'),
+                        coordinate : [0, 0],
+                        width : window.innerWidth,
+                        height : window.innerHeight,
+                        lineHeight : 152,
+                        fontSize : 152,
+                    },
+                ];
+                particles.SetText(texts);
+
+                
+                const anime = function(){
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.render();
+                    requestAnimationFrame(anime);
+                }
+                anime();
+
+            }
+
+
+            window.onload = function(){
+                const readyRxFramework = 500;
+                setTimeout(()=>{ initFunc(); }, readyRxFramework);
+            }
+
+        </script>
+
+
+
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Rx Text Particle Effect </h1>
+            <div>
+                <input id="txtDom" type="text" onkeyup="textChangeEvent(event)"
+                    placeholder="input anything"
+                />
+            </div>
+        </div>
+
+        
+        <canvas id="canvas"></canvas>
+
+
+
+
+    </body>
+</html>

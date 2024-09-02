@@ -9,6 +9,9 @@ RxRockPaperScissors
 - [Rx Brain Node](#rx-brain-node)
 - [RockPaperScissors](#RockPaperScissors)
 - [RxPersonalityIndicator](#RxPersonalityIndicator)
+- [RxEffects](#RxEffects)
+
+
 
 
 
@@ -89,3 +92,51 @@ const result3 = personality.GetMbtiState();      // 결과 값
 ```
 
 
+
+## RxEffects
+* Text Particle Effect
+* Image Particle Effect
+
+
+### Text Particle Effect 생성
+```javascript
+const particles = new RxFramework.TextParticleEffect({ canvas : canvas, gradients });
+
+```
+### Text Particle Effect 텍스트 세팅
+```javascript
+particles.SetQuality(3);        // Qualtiy : default 3, start Number : 1 ~
+const texts = [
+    {
+        txt : String('Rx Text Particle Effect'),
+        coordinate : [0, 0],
+        width : window.innerWidth,
+        height : window.innerHeight,
+        lineHeight : 152,
+        fontSize : 152,
+    },
+];
+particles.SetText(texts);
+```
+
+<img width="1659" alt="스크린샷 2024-09-02 오전 10 57 18" src="https://github.com/user-attachments/assets/e5f14911-08f2-4127-a437-630894ac8a82">
+<img width="1659" alt="스크린샷 2024-09-02 오전 10 57 16" src="https://github.com/user-attachments/assets/486c3757-fece-48b5-8059-9606708af1cc">
+
+
+### Image Particle Effect 생성 및 세팅
+```javascript
+images = IMAGE_BASE64;          // ArrayData
+const align = 'center';         // left, right, center : default
+const particles = new RxFramework.ImageParticleEffect({ canvas : canvas, images, align });
+particles.SetQuality(3);        // Qualtiy : default 3, start Number : 1 ~
+particles.LoadImage(index);     // ArrayData Index
+```
+
+<img width="1659" alt="스크린샷 2024-09-02 오전 11 24 49" src="https://github.com/user-attachments/assets/5cbdc3bf-466d-4591-90ca-687aa22fcf98">
+<img width="1659" alt="스크린샷 2024-09-02 오전 11 13 37" src="https://github.com/user-attachments/assets/1f7d5996-f442-4a01-9bdd-9e62a9191d84">
+
+<div class="copyright">
+프로그램 저작권 : Cloud Rx (<a href='https://rxapis.com'>https://rxapis.com</a>)
+이미지 출처 : ClarettaNovAI
+(<a href='https://www.pixiv.net/artworks/113717392'>https://www.pixiv.net/artworks/113717392</a>)
+</div>

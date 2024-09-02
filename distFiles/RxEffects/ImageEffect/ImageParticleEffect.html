@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        
+        <script src="../../../ImageData.js"></script>
+        <script src="./RxFramework.js"></script>
+
+
+        <style>
+            * { box-sizing: border-box; }
+            html, body {
+                padding : 0;
+                margin : 0;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+            }
+            .header {
+                position: absolute;
+                width: 300px;
+                padding: 10px;
+                z-index: 2;
+            }
+            .header input {
+                width: 100%;
+                padding : 7px 15px;
+            }
+            canvas {
+                position: absolute;
+                top : 0;
+                left : 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+        </style>
+
+        <script>
+
+
+            let index = 0;
+            const changeEvt = () => {
+                index++;
+                if(images.length < index) index = 0;
+
+                // There is [Ready State],
+                // This should be waitting, until completing load Image.
+                particles.LoadImage(index);
+            }
+
+            let images;
+            let particles;
+            const initFunc = () => {
+
+                // Effect
+                const canvas = document.getElementById("canvas");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                // window.addEventListener('resize', function(){
+                //     canvas.width = window.innerWidth;
+                //     canvas.height = window.innerHeight;
+                // });
+
+                const ctx = canvas.getContext('2d');
+
+                images = IMAGE_BASE64;
+                const align = 'center'; // left, right, center : default
+                particles = new RxFramework.ImageParticleEffect({ canvas : canvas, images, align });
+                particles.LoadImage(index);
+                particles.SetQuality(3); // default : 3, value : 1 ~ 
+                
+                const anime = function(){
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.render();
+                    requestAnimationFrame(anime);
+                }
+                anime();
+
+
+            }
+
+
+            window.onload = function(){
+
+                const readyRxFramework = 500;
+                setTimeout(()=>{ initFunc(); }, readyRxFramework);
+
+            }
+
+        </script>
+
+
+
+    </head>
+    <body>
+
+        <div class="header">
+            <h1>Rx Images Particle Effect </h1>
+            <div>
+                <button onclick="changeEvt(event)">Change</button>
+            </div>
+        </div>
+
+        <canvas id="canvas"></canvas>
+
+
+
+
+    </body>
+</html>
