@@ -10,7 +10,7 @@ RxRockPaperScissors
 - [RockPaperScissors](#RockPaperScissors)
 - [RxPersonalityIndicator](#RxPersonalityIndicator)
 - [RxEffects](#RxEffects)
-
+- [Gilgamesh](#Gilgamesh)
 
 
 
@@ -140,3 +140,16 @@ particles.LoadImage(index);     // ArrayData Index
 이미지 출처 : ClarettaNovAI
 (<a href='https://www.pixiv.net/artworks/113717392'>https://www.pixiv.net/artworks/113717392</a>)
 </div>
+
+
+
+### Gilgamesh
+* 브라우저 서비스 워커
+* 파티클 속도 개선 쓰레드
+
+```javascript
+// Load Before Rx Particles
+// Service Worker : Named Gilgamesh
+<script src="./Gilgamesh.js"></script>
+```
+

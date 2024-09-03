@@ -31,11 +31,23 @@
             }
         </style>
 
-        <script src="./RxFramework.js"></script>
-
         <script>
+            
+
+        </script>
+
+        <!--  Service Worker : Named Gilgamesh -->
+        <script src="./Gilgamesh.js"></script>
+        <script src="./RxFramework.js"></script>
+        
+        <script>
+
+            let sameWord = '';
             const textChangeEvent = (e) => {
                 const value = e.target.value.trim();
+                if(sameWord === value) return;
+                sameWord = value;
+
                 if(value === '') return;
 
                 const texts = [
@@ -67,7 +79,7 @@
                 // const gradients = ['FABC3F', 'E85C0D', 'C7253E', '821131'];
                 const gradients = ['F6E96B', 'BEDC74', 'A2CA71', '387F39'];
                 particles = new RxFramework.TextParticleEffect({ canvas : canvas, gradients });
-                // particles.SetQuality(1);
+                particles.SetQuality(3);
 
                 const texts = [
                     {
